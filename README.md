@@ -1,5 +1,16 @@
 # passando-em-redes-tcp-udp
 
+Para rodar o projeto, abra um Terminal e digite
+
+```sh
+python3 -m src.main
+```
+
+Se o programa mostrar "Olá, mundo!", significa que você passará em Redes.
+Caso contrário, _que merda, hein?_
+
+---
+
 ### Tarefa Bimestral
 
 - **10,0 pontos** — Criar uma aplicação para recuperar dados de computadores:
