@@ -12,3 +12,18 @@ tupla_da_ram = psutil.virtual_memory()
 memoria_ram_imediata = tupla_da_ram[1]
 memoria_ram_alocada_e_nao_usada = tupla_da_ram[4]
 print(tupla_da_ram, memoria_ram_imediata, memoria_ram_alocada_e_nao_usada)
+
+# 3 - Espaço livre em disco
+particoes_de_disco = psutil.disk_partitions(all = False)
+memoria_livre_de_cada_particao = list()
+
+for particao in particoes_de_disco:
+    try:
+        memoria_da_particao = psutil.disk_usage(particao.mountpoint)
+        memoria_livre_de_cada_particao.append({
+            "particao": particao.mountpoint,
+            "livre": memoria_da_particao.free
+        })
+    except Exception as e:
+        print(f"Não foi possível obter as informações sobre o ponto de montagem {particao.mountpoint}: {e}")
+print(memoria_livre_de_cada_particao)
