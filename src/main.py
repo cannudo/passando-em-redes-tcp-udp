@@ -1,6 +1,8 @@
 from libtcpudp.protocolos.servidores import ServidorTCP
-import random
+import psutil
 
-eu_vou_passar_em_redes = random.choice([True, False])
-
-print("Olá, mundo" if eu_vou_passar_em_redes else "Que merda, hein?")
+# 1 - Quantidade de processadores
+cpus_fisicas = psutil.cpu_count(logical = False)
+cpus_logicas = psutil.cpu_count(logical = True)
+threads_por_nucleo_fisico = cpus_logicas / cpus_fisicas
+print(cpus_fisicas, cpus_logicas, threads_por_nucleo_fisico)
