@@ -1,5 +1,5 @@
 from libtcpudp.protocolos.servidores import ServidorTCP
-import psutil
+import psutil, json
 
 # 1 - Quantidade de processadores
 cpus_fisicas = psutil.cpu_count(logical = False)
@@ -42,3 +42,7 @@ informacoes_do_sistema["ram"] = {
     "alocada_e_nao_usada": memoria_ram_alocada_e_nao_usada
 }
 informacoes_do_sistema["particoes"] = informacoes_das_particoes
+
+infos_para_enviar_na_rede = json.dumps(informacoes_do_sistema, indent = 4)
+
+print(infos_para_enviar_na_rede)
