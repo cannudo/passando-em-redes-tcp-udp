@@ -1,5 +1,7 @@
 from libtcpudp.protocolos.servidores import ServidorTCP
-import psutil, json
+from libtcpudp.protocolos.clientes import ClienteTCP
+
+import psutil, json, base64
 
 # 1 - Quantidade de processadores
 cpus_fisicas = psutil.cpu_count(logical = False)
@@ -43,6 +45,10 @@ informacoes_do_sistema["ram"] = {
 }
 informacoes_do_sistema["particoes"] = informacoes_das_particoes
 
-infos_para_enviar_na_rede = json.dumps(informacoes_do_sistema, indent = 4)
-
+infos_para_enviar_na_rede = json.dumps(informacoes_do_sistema, indent = 4).encode()
+infos_para_enviar_na_rede = base64.b64encode(infos_para_enviar_na_rede)
 print(infos_para_enviar_na_rede)
+
+clienteTCP = ClienteTCP("ipv4", "127.0.0.1", 54545, 2048)
+clienteTCP.conectarAoServidor()
+clienteTCP.enviarBase64PorPartes(infos_para_enviar_na_rede, 2048)
